@@ -26,7 +26,7 @@ namespace FunctionApp5
 
                 var _emailSender = new EmailSender();
 
-                var str = Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection") ?? "Server=tcp:reenbittesttaskdbserver.database.windows.net,1433;Initial Catalog=ReenbitTestTask_db;Persist Security Info=False;User ID=nanit;Password=19891206Kov;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                var str = Environment.GetEnvironmentVariable("ConnectionStrings:DefaultConnection");
                 using (var _applicationContext = new ApplicationContext(str))
                 {
                     var obj = _applicationContext.DbModelDatas.FirstOrDefaultAsync(d => d.FileName == name + "." + extension).Result;
@@ -44,21 +44,14 @@ namespace FunctionApp5
             }
             catch (Exception ex)
             {
-                string sendTo = "olegkrava7@gmail.com";
+                string sendTo = "{secret}";
                 string subject = "Exception";
                 string body = $"You are add file \nName: {name} \nType: {extension} \nSize: {myBlob.Length} Bytes \nUri: {uri?.ToString()} \n Email: null";
 
                 await new EmailSender().SendEmailAsync(sendTo, subject, body);
                 log.LogInformation($"Exception: {ex.Message}");
             }
-            finally
-            {
-                string sendTo = "olegkrava7@gmail.com";
-                string subject = "finally";
-                string body = $"You are add file \nName: {name} \nType: {extension} \nSize: {myBlob.Length} Bytes \nUri: {uri?.ToString()} \n Email: null";
-
-                await new EmailSender().SendEmailAsync(sendTo, subject, body);
-            }
+           
            
             
             
