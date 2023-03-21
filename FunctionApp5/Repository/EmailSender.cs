@@ -17,7 +17,7 @@ namespace FunctionApp5.Repository
             };
 
             return client.SendMailAsync(
-                new MailMessage(from: "olegkrava7@gmail.com",
+                new MailMessage(from: "{secret}",
                                 to: email,
                                 subject,
                                 message
