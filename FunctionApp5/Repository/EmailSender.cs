@@ -13,7 +13,7 @@ namespace FunctionApp5.Repository
             {
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("apikey", "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")
+                Credentials = new NetworkCredential("apikey", "{secret}")
             };
 
             return client.SendMailAsync(
